@@ -1,0 +1,28 @@
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        low=0
+        high=len(nums)-1
+        mid=0
+        a=[-1,-1]
+        if target not in nums:
+            return a
+        while(low<=high):
+            mid=(low+high)//2
+            if nums[mid]<target:
+                low=mid+1
+            elif nums[mid]>target:
+                high=mid-1
+            else:
+                a[0]=nums.index(nums[mid])
+                j=nums.count(target)
+                j=a[0]+j-1
+                a[1]=j
+                return a
+                
+                    
+        
