@@ -4,10 +4,10 @@
 class Solution {
 public:
     int firstBadVersion(int n) {
-        long long int low=1,high=n,mid,ans;
+         int low=1,high=n,mid,ans;
         while(low<=high)
         {
-            mid=(low+high)/2;
+            mid=low + (high-low)/2;
             if(isBadVersion(mid))
             {
                 ans=mid;
