@@ -31,55 +31,56 @@ struct Node {
 
 class Solution{
   public:
-  Node* getMid(Node* head ) {
-        Node* slow = head;
-        Node* fast = head -> next;
-        
-        while(fast != NULL && fast-> next != NULL) {
-            fast = fast -> next -> next;
-            slow = slow -> next;
+  
+    //Function to check whether the list is palindrome.
+    Node *getmid(Node *head)
+    {
+        if(head==NULL || head->next==NULL)
+            return head;
+        Node *fast=head->next;
+        Node *slow=head;
+        while(fast!=NULL && fast->next!=NULL)
+        {
+            fast=fast->next->next;
+            slow=slow->next;
         }
-        
         return slow;
     }
-    Node* reverse(Node* head) {
-        
-        Node* curr = head;
-        Node* prev = NULL;
-        Node* next = NULL;
-        
-        while(curr != NULL) {
-            next = curr -> next;
-            curr -> next = prev;
-            prev = curr;
-            curr = next;
+    Node *reverse(Node *head)
+    {
+        if(head->next==NULL)
+            return head;
+        Node *current=head;
+        Node *prev=NULL;
+        Node *after=NULL;
+        while(current!=NULL)
+        {
+            after=current->next;
+            current->next=prev;
+            prev=current;
+            current=after;
         }
         return prev;
     }
-    //Function to check whether the list is palindrome.
     bool isPalindrome(Node *head)
     {
-        if(head -> next == NULL) {
-            return true;
+        //Your code here
+        if(head->next==NULL)
+            return head;
+        Node *middle=getmid(head);
+        Node *temp=middle->next;
+        middle->next=reverse(temp);
+        Node* head1=head;
+        Node *head2=middle->next;
+        while(head2!=NULL)
+        {
+            if(head1->data!=head2->data)
+                return false;
+            head1=head1->next;
+            head2=head2->next;
         }
-        Node* middle = getMid(head);
-        //step2 -> reverse List after Middle
-        Node* temp = middle -> next;
-        middle -> next = reverse(temp);
-        
-        Node* head1 = head;
-        Node* head2 = middle -> next;
-        
-        while(head2 != NULL) {
-            if(head2->data != head1->data) {
-                return 0;
-            }
-            head1 = head1 -> next;
-            head2 = head2 -> next;
-        }
-        temp = middle -> next;
-        middle -> next = reverse(temp);
-        
+        temp=middle->next;
+        middle->next=reverse(middle);
         return true;
     }
 };
