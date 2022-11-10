@@ -122,7 +122,7 @@ int intersectPoint(Node* head1, Node* head2)
     temp1=head1;
     temp2=head2;
     int d;//as we dont know which of c1 or c2 is larger
-    if(c1>c2)
+    if(c1>=c2)
     {
         d=c1-c2;
         return solve(d,head1,head2);
