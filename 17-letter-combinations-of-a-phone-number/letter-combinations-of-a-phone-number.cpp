@@ -8,13 +8,7 @@ public:
             return;
         }
         
-        // string temp = mapping[value];
-        // for(int i=0;i<temp.length();i++)
-        // {
-        //     output.push_back(temp[i]);
-        //     solve(digits , index+1 , output , mapping , ans);
-        //     output.pop_back();
-        // }
+        
         int number = digits[index]-'0';
         string value = mapping[number];
         for(int i=0;i<value.length();i++)
