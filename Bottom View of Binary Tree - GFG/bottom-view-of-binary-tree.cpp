@@ -99,23 +99,25 @@ class Solution {
         // Your Code Here
         vector<int>ans;
         if(root == NULL) return ans;
+        queue<pair<int , Node*>> q;
         map<int , Node*>m;
-        queue<pair<Node* , int>>q;
-        q.push({root , 0});
+        q.push({0 , root});
         while(!q.empty())
         {
-            pair<Node* , int>front = q.front();
-            Node* temp = front.first;
-            int hd = front.second;
+            pair<int , Node*> front = q.front();
+            int hd = front.first;
+            Node* temp = front.second;
             q.pop();
             m[hd] = temp;
             if(temp->left)
-                q.push({temp->left , hd-1});
+                q.push({hd-1 , temp->left});
             if(temp->right)
-                q.push({temp->right , hd+1});
+                q.push({hd+1 , temp->right});
         }
         for(auto i : m)
+        {
             ans.push_back(i.second->data);
+        }
         return ans;
     }
 };
