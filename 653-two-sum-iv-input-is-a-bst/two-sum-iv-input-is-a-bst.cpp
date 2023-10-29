@@ -11,23 +11,22 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root , vector<int>& temp)
+    void inorder(TreeNode* root , vector<int>& arr)
     {
         if(root == NULL) return;
-        inorder(root->left , temp);
-        temp.push_back(root->val);
-        inorder(root->right , temp);
+        inorder(root->left ,arr);
+        arr.push_back(root->val);
+        inorder(root->right , arr);
     }
     bool findTarget(TreeNode* root, int k) {
-        vector<int>temp;
-        inorder(root , temp);
-        int n = temp.size() ,  i  = 0 , j = temp.size()-1;
-        while(i<j)
+        vector<int>arr;
+        inorder(root , arr);
+        int low = 0 , high = arr.size()-1;
+        while(low < high)
         {
-            int sum = temp[i]+temp[j];
-            if(sum == k) return true;
-            else if(sum > k) j--;
-            else i++;
+            if(arr[low] + arr[high] == k) return true;
+            else if(arr[low]+arr[high] > k) high--;
+            else low++;
         }
         return false;
     }
